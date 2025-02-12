@@ -8,6 +8,50 @@ If candidate A receives **p** votes and candidate B receives **q** votes (**p > 
 
 $$P(A \text{ always ahead}) = \frac{p - q}{p + q}$$
 
+### **Mathematical Proof**
+To derive this formula, we employ combinatorial arguments and the concept of **lattice paths**.
+
+#### **Step 1: Total Ways to Arrange Votes**
+A total of **p + q** votes are cast, with **p** votes for A and **q** votes for B. The total number of ways to order these votes is given by the binomial coefficient:
+
+$$\text{Total Arrangements} = \binom{p+q}{p} = \frac{(p+q)!}{p! q!}$$
+
+Each arrangement represents a possible vote-counting sequence.
+
+#### **Step 2: Lattice Path Representation**
+Each sequence can be visualized as a lattice path in a **p × q** grid, where:
+- A vote for **A** corresponds to a step **(+1, 0)** (rightward movement)
+- A vote for **B** corresponds to a step **(0, +1)** (upward movement)
+
+A valid vote sequence that satisfies Bertrand’s Ballot condition means the path **never crosses the diagonal** (i.e., A never falls behind B).
+
+#### **Step 3: Counting Valid Paths (Reflection Principle)**
+To count the number of valid paths where A is always ahead, we use a combinatorial approach called the **reflection principle**.
+
+Define:
+- **Valid paths** as those where A is never overtaken.
+- **Invalid paths** as those where A is overtaken at least once.
+
+The total number of vote arrangements is:
+
+$$\binom{p+q}{p}$$
+
+However, invalid paths can be mapped to valid paths by reflecting any path that first crosses the diagonal. The number of invalid paths can be computed using a shifted binomial coefficient:
+
+$$\binom{p+q}{p-1}$$
+
+Thus, the count of valid paths is:
+
+$$\binom{p+q}{p} - \binom{p+q}{p-1}$$
+
+Dividing by the total number of sequences gives:
+
+$$P(A \text{ always ahead}) = \frac{\binom{p+q}{p} - \binom{p+q}{p-1}}{\binom{p+q}{p}} = \frac{p - q}{p + q}$$
+
+This result holds for all **p > q** and has deep implications in electoral statistics, random walks, and stock market modeling.
+
+---
+
 # Folder Structure
 
 ```
