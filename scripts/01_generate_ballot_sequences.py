@@ -1,10 +1,20 @@
-# 1. Import necessary libraries (random, argparse, pandas)
-# 2. Define a function `generate_ballot_sequence(p, q)`:
-#     - Create a list with `p` "A" votes and `q` "B" votes.
-#     - Shuffle the list randomly.
-#     - Return the shuffled list.
-# 3. Define a main function to:
-#     - Accept command-line arguments for `p` and `q`
-#     - Generate `N` random sequences.
-#     - Store them in a CSV file (`outputs/ballot_sequences.csv`).
-# 4. Execute the main function if run as a script.
+import random
+import pandas as pd
+
+def generate_ballot_sequence(p, q):
+    votes = ["A"] * p + ["B"] * q
+    random.shuffle(votes)
+    return votes
+
+def main():
+
+    candidate_a_votes = 100
+    canditate_b_votes = 300
+    n_sequences = 1000
+
+    sequences = [generate_ballot_sequence(candidate_a_votes, canditate_b_votes) for _ in range(n_sequences)]
+    df = pd.DataFrame({"sequence": ["".join(seq) for seq in sequences]})
+    df.to_csv("outputs/ballot_sequences.csv", index=False)
+
+if __name__ == "__main__":
+    main()
